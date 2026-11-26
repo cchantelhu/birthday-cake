@@ -32,7 +32,7 @@
         background: rgba(255, 255, 255, 0.03);
       }
       .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: rgba(255, 217, 138, 0.45);
+        background: rgba(158, 184, 232, 0.45);
         border-radius: 2px;
       }
       @keyframes shimmer {
@@ -56,7 +56,7 @@
         }
       }
 
-      /* Soft Polynesian corner accents (hibiscus / plumeria) — HUD only, not on cake bloom */
+      /* Soft Polynesian corner accents — cool silver/blue florals */
       .island-accent {
         position: fixed;
         z-index: 35;
@@ -91,47 +91,45 @@
   <body>
     <div id="root"></div>
 
-    <!-- Decorative island florals (SVG) — subtle, outside the particle bloom -->
+    <!-- Decorative island florals (SVG) — silver / blue -->
     <svg class="island-accent bl" viewBox="0 0 160 120" aria-hidden="true">
       <defs>
         <radialGradient id="plumeriaCore" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#fff4d6" />
-          <stop offset="70%" stop-color="#ffd98a" />
-          <stop offset="100%" stop-color="#e8a85a" />
+          <stop offset="0%" stop-color="#f2f7ff" />
+          <stop offset="70%" stop-color="#d5e4f7" />
+          <stop offset="100%" stop-color="#9eb8e8" />
         </radialGradient>
       </defs>
-      <!-- plumeria -->
       <g transform="translate(95 48)">
-        <ellipse rx="16" ry="9" fill="#fff0d2" transform="rotate(0)" opacity="0.92" />
-        <ellipse rx="16" ry="9" fill="#ffe6b8" transform="rotate(72)" opacity="0.92" />
-        <ellipse rx="16" ry="9" fill="#fff0d2" transform="rotate(144)" opacity="0.92" />
-        <ellipse rx="16" ry="9" fill="#ffe6b8" transform="rotate(216)" opacity="0.92" />
-        <ellipse rx="16" ry="9" fill="#fff0d2" transform="rotate(288)" opacity="0.92" />
+        <ellipse rx="16" ry="9" fill="#e8eef8" transform="rotate(0)" opacity="0.92" />
+        <ellipse rx="16" ry="9" fill="#d5e4f7" transform="rotate(72)" opacity="0.92" />
+        <ellipse rx="16" ry="9" fill="#e8eef8" transform="rotate(144)" opacity="0.92" />
+        <ellipse rx="16" ry="9" fill="#d5e4f7" transform="rotate(216)" opacity="0.92" />
+        <ellipse rx="16" ry="9" fill="#e8eef8" transform="rotate(288)" opacity="0.92" />
         <circle r="5" fill="url(#plumeriaCore)" />
       </g>
-      <!-- hibiscus -->
       <g transform="translate(48 62)">
-        <ellipse rx="18" ry="10" fill="#e85a7a" transform="rotate(0)" opacity="0.88" />
-        <ellipse rx="18" ry="10" fill="#d6456a" transform="rotate(60)" opacity="0.88" />
-        <ellipse rx="18" ry="10" fill="#e85a7a" transform="rotate(120)" opacity="0.88" />
-        <ellipse rx="18" ry="10" fill="#d6456a" transform="rotate(180)" opacity="0.88" />
-        <ellipse rx="18" ry="10" fill="#e85a7a" transform="rotate(240)" opacity="0.88" />
-        <ellipse rx="18" ry="10" fill="#d6456a" transform="rotate(300)" opacity="0.88" />
-        <circle r="6" fill="#ffd98a" />
-        <path d="M0 0 C 4 -18, 10 -28, 6 -36" stroke="#ffd98a" stroke-width="2" fill="none" opacity="0.85" />
+        <ellipse rx="18" ry="10" fill="#6eb0ff" transform="rotate(0)" opacity="0.75" />
+        <ellipse rx="18" ry="10" fill="#5b7db3" transform="rotate(60)" opacity="0.75" />
+        <ellipse rx="18" ry="10" fill="#6eb0ff" transform="rotate(120)" opacity="0.75" />
+        <ellipse rx="18" ry="10" fill="#5b7db3" transform="rotate(180)" opacity="0.75" />
+        <ellipse rx="18" ry="10" fill="#6eb0ff" transform="rotate(240)" opacity="0.75" />
+        <ellipse rx="18" ry="10" fill="#5b7db3" transform="rotate(300)" opacity="0.75" />
+        <circle r="6" fill="#d5e4f7" />
+        <path d="M0 0 C 4 -18, 10 -28, 6 -36" stroke="#d5e4f7" stroke-width="2" fill="none" opacity="0.85" />
       </g>
-      <ellipse cx="118" cy="88" rx="14" ry="6" fill="#2fa39a" opacity="0.55" transform="rotate(-25 118 88)" />
+      <ellipse cx="118" cy="88" rx="14" ry="6" fill="#8aa6d4" opacity="0.55" transform="rotate(-25 118 88)" />
     </svg>
     <svg class="island-accent br" viewBox="0 0 160 120" aria-hidden="true">
       <g transform="translate(70 55)">
-        <ellipse rx="15" ry="8" fill="#fff0d2" transform="rotate(18)" opacity="0.85" />
-        <ellipse rx="15" ry="8" fill="#ffe6b8" transform="rotate(90)" opacity="0.85" />
-        <ellipse rx="15" ry="8" fill="#fff0d2" transform="rotate(162)" opacity="0.85" />
-        <ellipse rx="15" ry="8" fill="#ffe6b8" transform="rotate(234)" opacity="0.85" />
-        <ellipse rx="15" ry="8" fill="#fff0d2" transform="rotate(306)" opacity="0.85" />
-        <circle r="4.5" fill="#ffd98a" />
+        <ellipse rx="15" ry="8" fill="#e8eef8" transform="rotate(18)" opacity="0.85" />
+        <ellipse rx="15" ry="8" fill="#d5e4f7" transform="rotate(90)" opacity="0.85" />
+        <ellipse rx="15" ry="8" fill="#e8eef8" transform="rotate(162)" opacity="0.85" />
+        <ellipse rx="15" ry="8" fill="#d5e4f7" transform="rotate(234)" opacity="0.85" />
+        <ellipse rx="15" ry="8" fill="#e8eef8" transform="rotate(306)" opacity="0.85" />
+        <circle r="4.5" fill="#9eb8e8" />
       </g>
-      <ellipse cx="40" cy="78" rx="16" ry="7" fill="#2fa39a" opacity="0.45" transform="rotate(20 40 78)" />
+      <ellipse cx="40" cy="78" rx="16" ry="7" fill="#6eb0ff" opacity="0.4" transform="rotate(20 40 78)" />
     </svg>
 
     <script type="module" src="./src/wish-layer.js"></script>

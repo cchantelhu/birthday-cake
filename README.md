@@ -35,8 +35,8 @@ Edit **`gift-config.js`** at the repo root:
 ## What this build prioritizes
 
 - Particle cake / confetti drift / MediaPipe gesture camera / Cake Photos gallery.
-- Round **tiered birthday-cake** silhouette with candle tip (not a Christmas-tree cone).
-- Dense warm **gold** sparkles; soft **Polynesian** accents (hibiscus/plumeria HUD florals, teal+gold plate rim).
+- Prior birthday-cake particle silhouette (pre–short-tiers) with candle tip.
+- Cool **silver + blue** sparkles/lights; soft Polynesian corner florals.
 - No countdown; no wish-note overlay.
 - christmas-tree repo **untouched**.
 
