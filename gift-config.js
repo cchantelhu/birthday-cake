@@ -6,14 +6,14 @@
  *
  * Fields:
  *   name         — his name. Blank → greeting becomes "Happy birthday!"
- *   message      — text inside the folded note (after the candle).
+ *   message      — wish-note text (after blow-out).
  *   photo        — path to a photo shown in the note ('' to hide).
  *   photoCaption — shown when he taps the photo (back of the card).
  */
 export const gift = {
   name: '',
   message:
-    'Happy birthday.\n\nI made you this little cake — light the candle, make a wish, then open the note under the plate.\n\nI love you.',
+    'Happy birthday.\n\nOpen your palm to light the cake, make a wish, blow out the candle, then read this note.\n\nI love you.',
   photo: 'media/placeholder-photo.png',
   photoCaption: 'Replace this photo in media/ and update gift-config.js.',
 };
