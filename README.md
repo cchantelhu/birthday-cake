@@ -30,7 +30,8 @@ Edit **`gift-config.js`** at the repo root:
 
 | Field | Use |
 |--------|-----|
-| `name` | Blank → “Happy birthday!” |
+| `name` | Blank → “Happy birthday” |
+| `line` | Short loving line under the greeting |
 | `message` | Wish-note text after blow-out |
 | `photo` | Path under the site (`''` hides) |
 | `photoCaption` | Back of the photo card |

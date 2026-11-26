@@ -9,7 +9,29 @@ const lite = new URLSearchParams(location.search).has('lite');
 
 function greetingText(name) {
   const n = (name || '').trim();
-  return n ? `Happy birthday, ${n}` : 'Happy birthday!';
+  return n ? `Happy birthday, ${n}` : 'Happy birthday';
+}
+
+function lovingLine() {
+  const line = (gift.line || '').trim();
+  return line || 'I made this little cake for you.';
+}
+
+/** Keep the particle HUD in sync with gift-config (name + loving line). */
+function applyParticleHud() {
+  const root = document.getElementById('root');
+  if (!root) return false;
+  const h1 = root.querySelector('h1');
+  if (!h1) return false;
+  h1.textContent = greetingText(gift.name);
+
+  // Subtitle under the headline (was "Radiant Birthday Cake · …")
+  const sub = h1.parentElement?.querySelector('p');
+  if (sub) sub.textContent = lovingLine();
+
+  const eyebrow = h1.parentElement?.querySelector('span');
+  if (eyebrow) eyebrow.textContent = 'For you';
+  return true;
 }
 
 const state = {
@@ -35,10 +57,19 @@ const els = {
   btnGallery: document.getElementById('wish-note-gallery'),
 };
 
-document.title = `${greetingText(gift.name)} · Radiant Birthday Cake`;
+document.title = greetingText(gift.name);
 els.greeting.textContent = greetingText(gift.name);
 els.noteMessage.textContent = gift.message || '';
 els.noteCaption.textContent = gift.photoCaption || '';
+
+// Particle app mounts async — retry until HUD nodes exist
+let hudTries = 0;
+(function syncHud() {
+  if (applyParticleHud() || hudTries++ > 80) return;
+  requestAnimationFrame(syncHud);
+})();
+// Occasional refresh in case React re-renders the header
+setInterval(applyParticleHud, 1500);
 
 if (gift.photo) {
   els.notePhoto.src = gift.photo;
@@ -100,7 +131,7 @@ function markEntered() {
   // Soft fallback if gestures stay off: invite wish after the cake settles
   setTimeout(() => {
     if (state.phase === 'watching') enterLit();
-  }, lite ? 5000 : 8000);
+  }, lite ? 3500 : 4500);
 }
 
 // First interaction is also the particle enter gate
