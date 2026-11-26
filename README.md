@@ -18,7 +18,7 @@ On phones, Safari or Chrome is recommended. If the WeChat in-app browser cannot 
 3. Use these gestures in front of the camera:
    - Open palm: birthday cake particles light up / bloom.
    - Closed fist: particles return to the cake shape and stay clustered.
-   - Pinch: open the next gift wish (cycles lines from `gift-config.js`). You can also tap **Open a gift**.
+   - Pinch: bring the next gold **wish frame** forward (eight lines from `gift-config.js`).
 4. Drag with the mouse or use touch to adjust the view.
 5. Modes: **Birthday Cake** (layered particle cake) or **Confetti Drift**.
 
@@ -30,15 +30,15 @@ Edit **`gift-config.js`** at the repo root:
 |--------|-----|
 | `name` | Blank → “Happy birthday” |
 | `line` | Short loving line under the greeting |
-| `wishes` | Short birthday lines cycled by pinch / Open a gift |
+| `wishes` | Eight short lines → gold frames (BIRTHDAY 01…08 slots) |
 
 ## What this build prioritizes
 
 - Particle cake / confetti drift / MediaPipe gesture camera.
 - Prior birthday-cake particle silhouette with candle tip.
 - Warm **gold** sparkles with clearer (less blurry) bloom.
-- Pinch / **Open a gift** cycles short wishes from `gift-config.js` (photo gallery demoted).
-- Soft Polynesian corner florals; no countdown; no wish-note overlay.
+- Pinch cycles eight gold **wish frames** (same presentation as the old photo frames; text from `gift-config.js`).
+- Soft Polynesian corner florals; no countdown; no wish-note overlay; photo upload demoted.
 - christmas-tree repo **untouched**.
 
 ## Music (license-safe)
@@ -64,8 +64,10 @@ Static build files ready for GitHub Pages:
 - `assets/` — built particle JavaScript and CSS
 - `mediapipe/` — gesture recognition runtime
 - `audio/` — birthday music (CC0)
-- `gift-config.js` — personalization (name + line)
-- `src/wish-layer.js` — HUD greeting sync from gift-config
+- `gift-config.js` — personalization (name, line, eight wishes)
+- `src/wish-frames.js` — builds PNG textures for the eight gold frames
+- `src/wish-layer.js` — HUD greeting sync; demotes photo-upload chrome
+- Press **G** to cycle wish frames without the camera (same as pinch)
 
 Gesture camera fixes from christmas-tree PR #2 are included here only (MediaPipe base URL + offscreen preview).
 

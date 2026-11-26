@@ -7,7 +7,7 @@
  * Fields:
  *   name   — his name. Blank → greeting becomes "Happy birthday"
  *   line   — short loving line under the greeting
- *   wishes — short lines cycled when he pinches (or taps Open a gift)
+ *   wishes — eight short lines for the gold frames (slots 01…08). Pinch cycles them.
  */
 export const gift = {
   name: '',
@@ -18,6 +18,8 @@ export const gift = {
     'May this year be gentle and bright.',
     'You make ordinary days feel golden.',
     'Here’s to more laughter together.',
+    'Warm cake, warmer company.',
+    'Cheers to you, today and always.',
     'I love you. Always.',
   ],
 };

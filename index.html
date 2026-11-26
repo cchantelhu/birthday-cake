@@ -84,25 +84,13 @@
       }
     </style>
     <link rel="stylesheet" crossorigin href="./assets/index-BeE7YxDE.css" />
-    <link rel="stylesheet" href="./wish-layer.css?v=3" />
-    <script type="module" crossorigin src="./assets/index-CZPyPNxJ.js"></script>
+    <link rel="stylesheet" href="./wish-layer.css?v=11" />
+    <!-- Wish frame textures must register before the particle bundle reads XP -->
+    <script type="module" src="./src/wish-frames.js?v=11"></script>
+    <script type="module" crossorigin src="./assets/index-CZPyPNxJ.js?v=11"></script>
   </head>
   <body>
     <div id="root"></div>
-
-    <div id="gift-wish-root" aria-live="polite">
-      <div id="gift-wish-stage">
-        <div id="gift-wish-card" hidden></div>
-        <div id="gift-box" aria-hidden="true">
-          <div class="gift-lid"></div>
-          <div class="gift-body"></div>
-        </div>
-        <div id="gift-wish-actions">
-          <button type="button" id="gift-open-btn">Open a gift</button>
-        </div>
-        <p id="gift-wish-hint">Pinch to open a gift · or tap the button</p>
-      </div>
-    </div>
 
     <svg class="island-accent bl" viewBox="0 0 160 120" aria-hidden="true">
       <defs>
@@ -144,6 +132,6 @@
       <ellipse cx="40" cy="78" rx="16" ry="7" fill="#2fa39a" opacity="0.4" transform="rotate(20 40 78)" />
     </svg>
 
-    <script type="module" src="./src/wish-layer.js?v=3"></script>
+    <script type="module" src="./src/wish-layer.js?v=11"></script>
   </body>
 </html>
