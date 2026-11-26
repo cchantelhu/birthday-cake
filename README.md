@@ -14,14 +14,13 @@ On phones, Safari or Chrome is recommended. If the WeChat in-app browser cannot 
 ## How to use
 
 1. Open the page and click once to enter.
-2. Add photos in the **Cake Photos** panel (local browser storage; pinch advances photos).
-3. Click the camera / gesture button at the top right and allow camera access.
-4. Use these gestures in front of the camera:
+2. Click the camera / gesture button at the top right and allow camera access (optional).
+3. Use these gestures in front of the camera:
    - Open palm: birthday cake particles light up / bloom.
    - Closed fist: particles return to the cake shape and stay clustered.
-   - Pinch thumb and index finger, then release: switch to the next photo; after the last photo, it loops to the first.
-5. Drag with the mouse or use touch to adjust the view.
-6. Modes: **Birthday Cake** (layered particle cake) or **Confetti Drift**.
+   - Pinch: open the next gift wish (cycles lines from `gift-config.js`). You can also tap **Open a gift**.
+4. Drag with the mouse or use touch to adjust the view.
+5. Modes: **Birthday Cake** (layered particle cake) or **Confetti Drift**.
 
 ## Personalize (one file)
 
@@ -31,13 +30,15 @@ Edit **`gift-config.js`** at the repo root:
 |--------|-----|
 | `name` | Blank → “Happy birthday” |
 | `line` | Short loving line under the greeting |
+| `wishes` | Short birthday lines cycled by pinch / Open a gift |
 
 ## What this build prioritizes
 
-- Particle cake / confetti drift / MediaPipe gesture camera / Cake Photos gallery.
-- Prior birthday-cake particle silhouette (pre–short-tiers) with candle tip.
-- Cool **silver + blue** sparkles/lights; soft Polynesian corner florals.
-- No countdown; no wish-note overlay.
+- Particle cake / confetti drift / MediaPipe gesture camera.
+- Prior birthday-cake particle silhouette with candle tip.
+- Warm **gold** sparkles with clearer (less blurry) bloom.
+- Pinch / **Open a gift** cycles short wishes from `gift-config.js` (photo gallery demoted).
+- Soft Polynesian corner florals; no countdown; no wish-note overlay.
 - christmas-tree repo **untouched**.
 
 ## Music (license-safe)
