@@ -1,0 +1,450 @@
+:root {
+  --bg: #160e1a;
+  --plum: #2a1528;
+  --cream: #f6e7d4;
+  --frost: #fff6ee;
+  --gold: #e8b86d;
+  --rose: #e8a0b0;
+  --ink: #2a1a22;
+  --muted: rgba(246, 231, 212, 0.72);
+  --panel: rgba(22, 14, 26, 0.72);
+  --font-display: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Serif 4', 'Noto Serif', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 20%, #2a1528 0%, var(--bg) 55%, #0c070e 100%);
+  color: var(--cream);
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+  user-select: none;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#scene-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.overlay .hit {
+  pointer-events: auto;
+}
+
+.brand-safe {
+  text-align: center;
+  margin-top: min(8vh, 4rem);
+}
+
+.greeting {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 6vw, 3.4rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.greeting.show {
+  opacity: 1;
+  transform: none;
+}
+
+.subline {
+  margin: 0.75rem 0 0;
+  font-size: clamp(1rem, 2.8vw, 1.35rem);
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.9s ease 0.25s, transform 0.9s ease 0.25s;
+}
+
+.subline.show {
+  opacity: 1;
+  transform: none;
+}
+
+.prompt {
+  text-align: center;
+  margin-bottom: max(2rem, env(safe-area-inset-bottom));
+  min-height: 3.5rem;
+}
+
+.prompt p {
+  margin: 0;
+  font-size: clamp(1rem, 3.2vw, 1.25rem);
+  color: var(--cream);
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.prompt p.show {
+  opacity: 1;
+}
+
+.prompt .hint {
+  margin-top: 0.45rem;
+  font-size: 0.85rem;
+  color: rgba(246, 231, 212, 0.5);
+}
+
+.enter-gate {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(80% 60% at 50% 35%, rgba(88, 40, 70, 0.55), transparent 70%),
+    linear-gradient(180deg, #1a0f1c 0%, #0c070e 100%);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: opacity 0.7s ease;
+}
+
+.enter-gate.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.enter-card {
+  text-align: center;
+  padding: 1.5rem;
+  max-width: 22rem;
+}
+
+.enter-card h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  margin: 0 0 0.75rem;
+}
+
+.enter-card p {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+}
+
+.enter-card .cta {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid rgba(246, 231, 212, 0.35);
+  border-radius: 999px;
+  background: rgba(246, 231, 212, 0.08);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.note-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: none;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(8, 4, 10, 0.55);
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+}
+
+.note-layer.show {
+  display: grid;
+}
+
+.note-card {
+  width: min(92vw, 26rem);
+  height: min(78vh, 34rem);
+  max-height: min(78vh, 34rem);
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.note-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.note-card.flipped .note-inner {
+  transform: rotateY(180deg);
+}
+
+.note-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  background:
+    linear-gradient(145deg, #fffaf3 0%, #f3e2cf 100%);
+  color: var(--ink);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-face.back {
+  transform: rotateY(180deg);
+}
+
+.note-face.folded-hint {
+  justify-content: center;
+  align-items: center;
+  background:
+    repeating-linear-gradient(
+      -12deg,
+      #f7ebdc,
+      #f7ebdc 14px,
+      #f1e0cc 14px,
+      #f1e0cc 28px
+    );
+}
+
+.note-face.folded-hint span {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  padding: 0.75rem 1.1rem;
+  background: rgba(255, 250, 243, 0.88);
+  border-radius: 0.5rem;
+}
+
+.note-message {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 1.25rem 1.25rem 0.75rem;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: pre-wrap;
+  font-size: clamp(0.95rem, 3.2vw, 1.1rem);
+  line-height: 1.5;
+}
+
+.note-photo-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0.35rem 1.1rem 1.1rem;
+  border-radius: 0.65rem;
+  overflow: hidden;
+  background: #d9c4b0;
+  height: min(32%, 11rem);
+  display: grid;
+  place-items: center;
+}
+
+.note-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.note-photo-wrap .tap-hint {
+  position: absolute;
+  bottom: 1.35rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(42, 26, 34, 0.55);
+}
+
+.note-caption {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 4vw, 1.5rem);
+  line-height: 1.4;
+}
+
+.note-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.note-actions button,
+.gallery-panel button,
+.icon-btn {
+  pointer-events: auto;
+  border: 1px solid rgba(246, 231, 212, 0.3);
+  background: rgba(22, 14, 26, 0.65);
+  color: var(--cream);
+  border-radius: 999px;
+  padding: 0.65rem 1.15rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.gallery-shell {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  display: none;
+}
+
+.gallery-shell.show {
+  display: block;
+}
+
+.gallery-panel {
+  position: absolute;
+  top: max(0.75rem, env(safe-area-inset-top));
+  left: 0.75rem;
+  width: min(18rem, calc(100vw - 1.5rem));
+  pointer-events: auto;
+  background: var(--panel);
+  border: 1px solid rgba(246, 231, 212, 0.14);
+  border-radius: 1rem;
+  padding: 0.85rem;
+  backdrop-filter: blur(10px);
+}
+
+.gallery-panel h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.gallery-panel .meta {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(246, 231, 212, 0.5);
+}
+
+.thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  max-height: 9.5rem;
+  overflow: auto;
+}
+
+.thumbs img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbs img.active {
+  border-color: var(--rose);
+}
+
+.gallery-panel .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.gallery-panel input[type='file'] {
+  display: none;
+}
+
+.hud-right {
+  position: absolute;
+  top: max(0.75rem, env(safe-area-inset-top));
+  right: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+  pointer-events: auto;
+}
+
+.gesture-status {
+  font-size: 0.75rem;
+  color: rgba(246, 231, 212, 0.55);
+  max-width: 10rem;
+  text-align: right;
+}
+
+#hand-preview {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0.01;
+  pointer-events: none;
+  bottom: 0;
+  right: 0;
+}
+
+.slide-photo {
+  position: absolute;
+  left: 50%;
+  bottom: max(5.5rem, calc(env(safe-area-inset-bottom) + 4.5rem));
+  transform: translateX(-50%);
+  width: min(42vw, 220px);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.slide-photo.show {
+  opacity: 1;
+}
+
+.slide-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .gallery-panel {
+    width: min(16.5rem, calc(100vw - 1.25rem));
+  }
+
+  .greeting {
+    padding: 0 0.5rem;
+  }
+}
