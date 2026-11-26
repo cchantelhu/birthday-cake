@@ -2,42 +2,113 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Radiant Birthday Cake · Happy Birthday</title>
-    <!-- Tailwind CSS is bundled locally via @tailwindcss/vite; MediaPipe scripts load on-demand -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Noto+Serif+SC:wght@400;600;700&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet">
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-        background-color: #160e1a;
-        font-family: 'Noto Serif SC', 'Playfair Display', serif;
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#160e1a" />
+    <title>Happy birthday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./vendor/three.module.js"
+        }
       }
-      canvas {
-        touch-action: none;
-      }
-      .font-display {
-        font-family: 'Playfair Display', 'Noto Serif SC', serif;
-      }
-      .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-      .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
-      .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,183,197,0.4); border-radius: 2px; }
-      @keyframes shimmer {
-        0%, 100% { opacity: 0.55; }
-        50% { opacity: 1; }
-      }
-      .shimmer { animation: shimmer 3s ease-in-out infinite; }
-      @keyframes snowfall-gradient {
-        0% { background-position: 0% 0%; }
-        100% { background-position: 0% 200%; }
-      }
-    </style>
-    <script type="module" crossorigin src="./assets/index-CZPyPNxJ.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BeE7YxDE.css">
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="app">
+      <canvas id="scene-canvas" aria-label="Birthday cake scene"></canvas>
+
+      <div class="overlay" id="overlay">
+        <div class="brand-safe">
+          <h1 class="greeting" id="greeting">Happy birthday!</h1>
+          <p class="subline" id="subline">I made you a cake 😊</p>
+        </div>
+        <div class="prompt">
+          <p id="prompt"></p>
+          <p class="hint" id="prompt-hint"></p>
+        </div>
+      </div>
+
+      <div
+        class="enter-gate"
+        id="enter-gate"
+        role="button"
+        tabindex="0"
+        aria-label="Enter the birthday cake"
+      >
+        <div class="enter-card">
+          <h1>A cake for you</h1>
+          <p>Tap anywhere to begin · sound on</p>
+          <span class="cta">Open gift</span>
+        </div>
+      </div>
+
+      <div class="note-layer" id="note-layer" aria-live="polite">
+        <div>
+          <div class="note-card" id="note-card">
+            <div class="note-inner">
+              <div class="note-face folded-hint" id="note-folded" hidden>
+                <span>Okay, my turn.</span>
+              </div>
+              <div class="note-face" id="note-front">
+                <div class="note-message" id="note-message"></div>
+                <div class="note-photo-wrap" id="note-photo-wrap">
+                  <img id="note-photo" alt="" />
+                </div>
+              </div>
+              <div class="note-face back">
+                <div class="note-caption" id="note-caption"></div>
+              </div>
+            </div>
+          </div>
+          <div class="note-actions">
+            <button type="button" id="btn-close-note">Tuck note</button>
+            <button type="button" id="btn-continue-gallery">Cake Photos</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-shell" id="gallery-shell">
+        <div class="gallery-panel">
+          <h2>Cake Photos</h2>
+          <p class="meta">Local only · pinch or buttons for next</p>
+          <div class="thumbs" id="thumbs"></div>
+          <div class="row">
+            <button type="button" id="btn-add-photo">Add photos</button>
+            <button type="button" id="btn-prev-photo">Prev</button>
+            <button type="button" id="btn-next-photo">Next</button>
+          </div>
+          <input
+            id="photo-input"
+            type="file"
+            accept="image/*"
+            multiple
+            capture="environment"
+          />
+        </div>
+        <div class="hud-right">
+          <button type="button" class="icon-btn" id="btn-camera">
+            Camera gestures
+          </button>
+          <div class="gesture-status" id="gesture-status"></div>
+        </div>
+        <div class="slide-photo" id="slide-photo">
+          <img alt="Gallery photo" />
+        </div>
+      </div>
+
+      <video id="hand-preview" playsinline muted></video>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
