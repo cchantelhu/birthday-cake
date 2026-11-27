@@ -1,8 +1,7 @@
 /**
- * Build 8 framed wish textures (PNG blob URLs) for the particle app's gold frames.
+ * Build 9 framed wish textures (PNG blob URLs) for the particle app's gold frames.
  * Must load before assets/index-*.js so window.__birthdayWishFrames is ready.
- * Blob URLs (not SVG, not giant data URLs) load reliably via Three TextureLoader.
- * Text from gift-config.js wishes[0..7] → BIRTHDAY 01…08 slots.
+ * Wish text only — no "BIRTHDAY 01" style labels (preferences).
  */
 import { gift } from '../gift-config.js';
 
@@ -15,18 +14,22 @@ const PALETTE = [
   ['#101628', '#ffd86b'],
   ['#15101f', '#fff7e6'],
   ['#101628', '#e8b86d'],
+  ['#12101c', '#ffd9a8'],
 ];
 
 const DEFAULTS = [
   'Happy birthday — make a wish.',
-  'Another year of you. I’m so glad.',
+  'Keep glowing the way only you do.',
   'May this year be gentle and bright.',
   'You make ordinary days feel golden.',
   'Here’s to more laughter together.',
   'Warm cake, warmer company.',
   'Cheers to you, today and always.',
-  'I love you. Always.',
+  'that wish you kept to yourself coming true',
+  'one last thing, a kiss for luck',
 ];
+
+const FRAME_COUNT = 9;
 
 function wrapLines(text, maxChars = 16) {
   const words = String(text || '')
@@ -57,7 +60,7 @@ function canvasToBlobUrl(canvas) {
   return URL.createObjectURL(new Blob([bytes], { type: 'image/png' }));
 }
 
-function frameTexture(label, bg, stroke, index) {
+function frameTexture(label, bg, stroke) {
   const size = 512;
   const c = document.createElement('canvas');
   c.width = size;
@@ -84,19 +87,13 @@ function frameTexture(label, bg, stroke, index) {
   ctx.setLineDash([]);
   ctx.globalAlpha = 1;
 
-  ctx.fillStyle = stroke;
-  ctx.globalAlpha = 0.6;
-  ctx.font = '600 20px Georgia, "Times New Roman", serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(`BIRTHDAY ${String(index + 1).padStart(2, '0')}`, size / 2, 68);
-  ctx.globalAlpha = 1;
-
   const lines = wrapLines(label, 16);
   ctx.fillStyle = stroke;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
   ctx.font = '700 38px Georgia, "Times New Roman", serif';
   const lineH = 48;
-  const startY = size / 2 - ((lines.length - 1) * lineH) / 2 + 10;
+  const startY = size / 2 - ((lines.length - 1) * lineH) / 2;
   lines.forEach((line, i) => {
     ctx.fillText(line, size / 2, startY + i * lineH);
   });
@@ -106,13 +103,13 @@ function frameTexture(label, bg, stroke, index) {
 
 function buildFrames() {
   const raw = Array.isArray(gift.wishes) ? gift.wishes : [];
-  const wishes = Array.from({ length: 8 }, (_, i) => {
+  const wishes = Array.from({ length: FRAME_COUNT }, (_, i) => {
     const w = String(raw[i] || DEFAULTS[i] || DEFAULTS[0]).trim();
     return w || DEFAULTS[i];
   });
   return wishes.map((w, i) => {
     const [bg, stroke] = PALETTE[i % PALETTE.length];
-    return frameTexture(w, bg, stroke, i);
+    return frameTexture(w, bg, stroke);
   });
 }
 
