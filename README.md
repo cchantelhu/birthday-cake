@@ -30,14 +30,14 @@ Edit **`gift-config.js`** at the repo root:
 |--------|-----|
 | `name` | Blank → “Happy birthday” |
 | `line` | Short loving line under the greeting |
-| `wishes` | Nine short lines for the gold wish frames |
+| `wishes` | Eight short lines for the gold wish frames |
 
 ## What this build prioritizes
 
 - Particle cake / confetti drift / MediaPipe gesture camera.
 - Prior birthday-cake particle silhouette with candle tip.
 - Warm **gold** sparkles with clearer (less blurry) bloom.
-- Pinch cycles nine gold **wish frames** (same presentation as the old photo frames; text from `gift-config.js`).
+- Pinch cycles eight gold **wish frames** (same presentation as the old photo frames; text from `gift-config.js`).
 - Ambient sky: small ribbons, confetti, and balloons (not snow).
 - Cake toppers: fruit pieces instead of gift confetti cubes.
 - Soft Polynesian corner florals; no countdown; no wish-note overlay; photo upload demoted.
@@ -66,7 +66,7 @@ Static build files ready for GitHub Pages:
 - `assets/` — built particle JavaScript and CSS
 - `mediapipe/` — gesture recognition runtime
 - `audio/` — birthday music (CC0)
-- `gift-config.js` — personalization (name, line, nine wishes)
+- `gift-config.js` — personalization (name, line, eight wishes)
 - `src/wish-frames.js` — builds PNG textures for the eight gold frames
 - `src/wish-layer.js` — HUD greeting sync; demotes photo-upload chrome
 - Press **G** to cycle wish frames without the camera (same as pinch)

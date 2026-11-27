@@ -1,5 +1,5 @@
 /**
- * Build 9 framed wish textures (PNG blob URLs) for the particle app's gold frames.
+ * Build 8 framed wish textures (PNG blob URLs) for the particle app's gold frames.
  * Must load before assets/index-*.js so window.__birthdayWishFrames is ready.
  * Wish text only — no "BIRTHDAY 01" style labels (preferences).
  */
@@ -14,7 +14,6 @@ const PALETTE = [
   ['#101628', '#ffd86b'],
   ['#15101f', '#fff7e6'],
   ['#101628', '#e8b86d'],
-  ['#12101c', '#ffd9a8'],
 ];
 
 const DEFAULTS = [
@@ -22,14 +21,13 @@ const DEFAULTS = [
   'Keep glowing the way only you do.',
   'May this year be gentle and bright.',
   'You make ordinary days feel golden.',
-  'Here’s to more laughter together.',
+  'Here’s to more laughter, joy, and happiness.',
   'Warm cake, warmer company.',
   'Cheers to you, today and always.',
-  'that wish you kept to yourself coming true',
-  'one last thing, a kiss for luck',
+  'that wish you kept to yourself coming true.',
 ];
 
-const FRAME_COUNT = 9;
+const FRAME_COUNT = 8;
 
 function wrapLines(text, maxChars = 16) {
   const words = String(text || '')
