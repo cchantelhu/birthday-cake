@@ -7,19 +7,20 @@
  * Fields:
  *   name   — his name. Blank → greeting becomes "Happy birthday"
  *   line   — short loving line under the greeting
- *   wishes — eight short lines for the gold frames (slots 01…08). Pinch cycles them.
+ *   wishes — nine short lines for the gold frames. Pinch / G cycles them.
  */
 export const gift = {
   name: '',
   line: 'I made this little cake for you.',
   wishes: [
     'Happy birthday — make a wish.',
-    'Another year of you. I’m so glad.',
+    'Keep glowing the way only you do.',
     'May this year be gentle and bright.',
     'You make ordinary days feel golden.',
     'Here’s to more laughter together.',
     'Warm cake, warmer company.',
     'Cheers to you, today and always.',
-    'I love you. Always.',
+    'that wish you kept to yourself coming true',
+    'one last thing, a kiss for luck',
   ],
 };
