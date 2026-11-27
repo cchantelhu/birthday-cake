@@ -30,6 +30,33 @@ function applyParticleHud() {
   return true;
 }
 
+
+/** Hide only the dark gesture/drag instruction panel if it ever reappears. Keep camera/settings buttons. */
+function demoteInstructionPanel() {
+  const root = document.getElementById('root');
+  if (!root) return;
+  root.querySelectorAll('div').forEach((el) => {
+    const t = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (
+      /Tap the camera button to enable gestures/i.test(t) &&
+      /Open palm/i.test(t) &&
+      /Closed fist/i.test(t) &&
+      el.querySelector('button') == null &&
+      el.clientWidth > 0 &&
+      el.clientWidth < 280
+    ) {
+      el.dataset.giftHide = '1';
+    }
+  });
+  // Ensure gesture camera control stays available
+  root.querySelectorAll('button[title*="Gesture control"], button[title*="camera"]').forEach((btn) => {
+    btn.hidden = false;
+    btn.style.display = '';
+    btn.removeAttribute('data-gift-hide');
+    if (!btn.getAttribute('aria-label')) btn.setAttribute('aria-label', 'Enable gesture camera');
+  });
+}
+
 function demotePhotoGallery() {
   document.body.classList.add('hide-photo-gallery');
   const root = document.getElementById('root');
@@ -76,10 +103,12 @@ let hudTries = 0;
 (function syncHud() {
   applyParticleHud();
   demotePhotoGallery();
+  demoteInstructionPanel();
   if (hudTries++ > 80) return;
   requestAnimationFrame(syncHud);
 })();
 setInterval(() => {
   applyParticleHud();
   demotePhotoGallery();
+  demoteInstructionPanel();
 }, 1500);

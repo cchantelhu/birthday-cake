@@ -14,7 +14,7 @@ On phones, Safari or Chrome is recommended. If the WeChat in-app browser cannot 
 ## How to use
 
 1. Open the page and click once to enter.
-2. Click the camera / gesture button at the top right and allow camera access (optional).
+2. Click the camera / gesture button at the top right and allow camera access (optional). The on-screen instruction panel is removed; the camera button stays.
 3. Use these gestures in front of the camera:
    - Open palm: birthday cake particles light up / bloom.
    - Closed fist: particles return to the cake shape and stay clustered.
