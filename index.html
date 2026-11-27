@@ -55,46 +55,83 @@
           background-position: 0% 200%;
         }
       }
+
+      .island-accent {
+        position: fixed;
+        z-index: 35;
+        pointer-events: none;
+        width: min(9.5rem, 28vw);
+        height: auto;
+        opacity: 0.7;
+        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+      }
+      .island-accent.bl {
+        bottom: max(0.85rem, env(safe-area-inset-bottom));
+        left: max(0.75rem, env(safe-area-inset-left));
+        opacity: 0.6;
+      }
+      .island-accent.br {
+        bottom: max(0.85rem, env(safe-area-inset-bottom));
+        right: max(0.75rem, env(safe-area-inset-right));
+        opacity: 0.5;
+        transform: scaleX(-1) rotate(-8deg);
+      }
+      @media (max-width: 640px) {
+        .island-accent {
+          width: min(6.5rem, 26vw);
+          opacity: 0.5;
+        }
+      }
     </style>
     <link rel="stylesheet" crossorigin href="./assets/index-BeE7YxDE.css" />
-    <link rel="stylesheet" href="./wish-layer.css" />
-    <script type="module" crossorigin src="./assets/index-CZPyPNxJ.js"></script>
+    <link rel="stylesheet" href="./wish-layer.css?v=11" />
+    <!-- Wish frame textures must register before the particle bundle reads XP -->
+    <script type="module" src="./src/wish-frames.js?v=11"></script>
+    <script type="module" crossorigin src="./assets/index-CZPyPNxJ.js?v=11"></script>
   </head>
   <body>
     <div id="root"></div>
 
-    <!-- Layered wish + blow (on top of particle gestures; does not replace them) -->
-    <div id="wish-root" aria-live="polite">
-      <div id="wish-banner">
-        <p id="wish-greeting">Happy birthday!</p>
-        <p id="wish-prompt"></p>
-        <p id="wish-hint"></p>
-        <button type="button" id="wish-blow-btn" hidden>Blow out candle</button>
-      </div>
+    <svg class="island-accent bl" viewBox="0 0 160 120" aria-hidden="true">
+      <defs>
+        <radialGradient id="plumeriaCore" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff4d6" />
+          <stop offset="70%" stop-color="#ffd98a" />
+          <stop offset="100%" stop-color="#e8a85a" />
+        </radialGradient>
+      </defs>
+      <g transform="translate(95 48)">
+        <ellipse rx="16" ry="9" fill="#fff0d2" transform="rotate(0)" opacity="0.9" />
+        <ellipse rx="16" ry="9" fill="#ffe6b8" transform="rotate(72)" opacity="0.9" />
+        <ellipse rx="16" ry="9" fill="#fff0d2" transform="rotate(144)" opacity="0.9" />
+        <ellipse rx="16" ry="9" fill="#ffe6b8" transform="rotate(216)" opacity="0.9" />
+        <ellipse rx="16" ry="9" fill="#fff0d2" transform="rotate(288)" opacity="0.9" />
+        <circle r="5" fill="url(#plumeriaCore)" />
+      </g>
+      <g transform="translate(48 62)">
+        <ellipse rx="18" ry="10" fill="#e85a7a" transform="rotate(0)" opacity="0.82" />
+        <ellipse rx="18" ry="10" fill="#d6456a" transform="rotate(60)" opacity="0.82" />
+        <ellipse rx="18" ry="10" fill="#e85a7a" transform="rotate(120)" opacity="0.82" />
+        <ellipse rx="18" ry="10" fill="#d6456a" transform="rotate(180)" opacity="0.82" />
+        <ellipse rx="18" ry="10" fill="#e85a7a" transform="rotate(240)" opacity="0.82" />
+        <ellipse rx="18" ry="10" fill="#d6456a" transform="rotate(300)" opacity="0.82" />
+        <circle r="6" fill="#ffd98a" />
+        <path d="M0 0 C 4 -18, 10 -28, 6 -36" stroke="#ffd98a" stroke-width="2" fill="none" opacity="0.85" />
+      </g>
+      <ellipse cx="118" cy="88" rx="14" ry="6" fill="#2fa39a" opacity="0.5" transform="rotate(-25 118 88)" />
+    </svg>
+    <svg class="island-accent br" viewBox="0 0 160 120" aria-hidden="true">
+      <g transform="translate(70 55)">
+        <ellipse rx="15" ry="8" fill="#fff0d2" transform="rotate(18)" opacity="0.85" />
+        <ellipse rx="15" ry="8" fill="#ffe6b8" transform="rotate(90)" opacity="0.85" />
+        <ellipse rx="15" ry="8" fill="#fff0d2" transform="rotate(162)" opacity="0.85" />
+        <ellipse rx="15" ry="8" fill="#ffe6b8" transform="rotate(234)" opacity="0.85" />
+        <ellipse rx="15" ry="8" fill="#fff0d2" transform="rotate(306)" opacity="0.85" />
+        <circle r="4.5" fill="#ffd98a" />
+      </g>
+      <ellipse cx="40" cy="78" rx="16" ry="7" fill="#2fa39a" opacity="0.4" transform="rotate(20 40 78)" />
+    </svg>
 
-      <div id="wish-note-layer">
-        <div>
-          <div id="wish-note-card">
-            <div class="note-inner">
-              <div class="wish-note-face">
-                <div id="wish-note-message"></div>
-                <div id="wish-note-photo-wrap">
-                  <img id="wish-note-photo" alt="" />
-                </div>
-              </div>
-              <div class="wish-note-face back">
-                <div id="wish-note-caption"></div>
-              </div>
-            </div>
-          </div>
-          <div class="wish-note-actions">
-            <button type="button" id="wish-note-close">Tuck note</button>
-            <button type="button" id="wish-note-gallery">Cake Photos</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script type="module" src="./src/wish-layer.js"></script>
+    <script type="module" src="./src/wish-layer.js?v=11"></script>
   </body>
 </html>

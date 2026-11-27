@@ -1,6 +1,6 @@
-# Radiant Birthday Cake · Happy Birthday
+# Birthday Cake · Happy Birthday
 
-A browser-based 3D interactive birthday cake page with gesture control, photo slideshow, music, celebration particles, and a layered wish / blow-out note. Sibling of [christmas-tree](https://github.com/cchantelhu/christmas-tree) (that repo is unchanged).
+A browser-based 3D interactive birthday cake page with gesture control, photo slideshow, music, and celebration particles. Sibling of [christmas-tree](https://github.com/cchantelhu/christmas-tree) (that repo is unchanged).
 
 ## Try it online
 
@@ -14,15 +14,13 @@ On phones, Safari or Chrome is recommended. If the WeChat in-app browser cannot 
 ## How to use
 
 1. Open the page and click once to enter.
-2. Add photos in the **Cake Photos** panel (local browser storage; pinch advances photos).
-3. Click the camera / gesture button at the top right and allow camera access.
-4. Use these gestures in front of the camera:
+2. Click the camera / gesture button at the top right and allow camera access (optional).
+3. Use these gestures in front of the camera:
    - Open palm: birthday cake particles light up / bloom.
    - Closed fist: particles return to the cake shape and stay clustered.
-   - Pinch thumb and index finger, then release: switch to the next photo; after the last photo, it loops to the first.
-5. After the cake blooms (or after a short settle), **make a wish** and **blow out the candle** (mic or the Blow button) to open the personalized note from `gift-config.js`.
-6. Drag with the mouse or use touch to adjust the view.
-7. Modes: **Birthday Cake** (layered particle cake) or **Confetti Drift**.
+   - Pinch: bring the next gold **wish frame** forward (eight lines from `gift-config.js`).
+4. Drag with the mouse or use touch to adjust the view.
+5. Modes: **Birthday Cake** (layered particle cake) or **Confetti Drift**.
 
 ## Personalize (one file)
 
@@ -32,18 +30,16 @@ Edit **`gift-config.js`** at the repo root:
 |--------|-----|
 | `name` | Blank → “Happy birthday” |
 | `line` | Short loving line under the greeting |
-| `message` | Wish-note text after blow-out |
-| `photo` | Path under the site (`''` hides) |
-| `photoCaption` | Back of the photo card |
-
-Placeholder photo: `media/placeholder-photo.png`.
+| `wishes` | Eight short lines → gold frames (BIRTHDAY 01…08 slots) |
 
 ## What this build prioritizes
 
-- **Restored** particle cake / confetti drift / MediaPipe gesture camera / Cake Photos gallery (pre–gift-flow experience).
-- **Added** layered wish + candle blow-out + note on top of gestures (does not replace open-palm enter).
-- Matchbook-only mesh redesign is **demoted** (no longer the main path).
-- Visual: stepped birthday-cake silhouette with a **candle tip** (not a Christmas star).
+- Particle cake / confetti drift / MediaPipe gesture camera.
+- Prior birthday-cake particle silhouette with candle tip.
+- Warm **gold** sparkles with clearer (less blurry) bloom.
+- Pinch cycles eight gold **wish frames** (same presentation as the old photo frames; text from `gift-config.js`).
+- Soft Polynesian corner florals; no countdown; no wish-note overlay; photo upload demoted.
+- christmas-tree repo **untouched**.
 
 ## Music (license-safe)
 
@@ -57,7 +53,6 @@ File: `audio/happy-birthday-acoustic-guitar.mp3`
 - Uploaded photos are stored in this site’s local database on the current device and browser; they are not written into this GitHub repository.
 - This version has no feature that uploads photos to a server or sends them to the site owner; photos are shown via local browser object URLs.
 - The camera feed is processed by MediaPipe hand tracking in the browser; the current code does not send the camera feed to a server.
-- Mic blow-out (optional) uses the browser microphone locally and is never uploaded.
 - Photos persist when you reopen the page on the same device and browser profile; anyone sharing that browser profile may see them.
 - Clearing this site’s data in the browser deletes locally saved photos. Photos do not sync automatically across devices or browser profiles.
 
@@ -65,16 +60,17 @@ File: `audio/happy-birthday-acoustic-guitar.mp3`
 
 Static build files ready for GitHub Pages:
 
-- `index.html` — page entry (particle app + wish layer)
+- `index.html` — page entry (particle app + gift-config HUD sync)
 - `assets/` — built particle JavaScript and CSS
 - `mediapipe/` — gesture recognition runtime
 - `audio/` — birthday music (CC0)
-- `gift-config.js` — personalization
-- `src/wish-layer.js` / `src/mic-blow.js` — layered wish + blow
-- `wish-layer.css` — note / prompt overlay styles
+- `gift-config.js` — personalization (name, line, eight wishes)
+- `src/wish-frames.js` — builds PNG textures for the eight gold frames
+- `src/wish-layer.js` — HUD greeting sync; demotes photo-upload chrome
+- Press **G** to cycle wish frames without the camera (same as pinch)
 
 Gesture camera fixes from christmas-tree PR #2 are included here only (MediaPipe base URL + offscreen preview).
 
 ## Source
 
-Adapted from [cchantelhu/christmas-tree](https://github.com/cchantelhu/christmas-tree) / upstream [nobody-r/christmas-tree](https://github.com/nobody-r/christmas-tree). Birthday retheme, cake silhouette, wish layer, and audio are unique to this repository.
+Adapted from [cchantelhu/christmas-tree](https://github.com/cchantelhu/christmas-tree) / upstream [nobody-r/christmas-tree](https://github.com/nobody-r/christmas-tree). Birthday retheme, cake silhouette, and audio are unique to this repository.
